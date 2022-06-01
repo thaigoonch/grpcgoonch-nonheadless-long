@@ -1,2 +1,2 @@
-# grpcgoonch-nonheadless
-The same as https://github.com/thaigoonch/grpcgoonch-headless, except not a headless service; meaning the ClusterIP is not set to none.
+# grpcgoonch-nonheadless-long
+The same as https://github.com/thaigoonch/grpcgoonch-nonheadless, but with an 8 minute MaxConnectionAge (as opposed to a 31 second one).

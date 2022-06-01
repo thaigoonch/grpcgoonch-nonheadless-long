@@ -1,4 +1,4 @@
-module github.com/thaigoonch/grpcgoonch-nonheadless
+module github.com/thaigoonch/grpcgoonch-nonheadless-long
 
 go 1.17
 

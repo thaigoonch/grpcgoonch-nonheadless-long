@@ -16,7 +16,7 @@ import (
 	grpc_prometheus "github.com/grpc-ecosystem/go-grpc-prometheus"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	grpcgoonch "github.com/thaigoonch/grpcgoonch-headless/service"
+	grpcgoonch "github.com/thaigoonch/grpcgoonch-nonheadless-long/service"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/grpclog"
@@ -29,7 +29,7 @@ var (
 	reg          = prometheus.NewRegistry()
 	grpcMetrics  = grpc_prometheus.NewServerMetrics()
 	grpcReqCount = prometheus.NewCounter(prometheus.CounterOpts{
-		Name: "grpcgoonchnonheadless_server_handle_count",
+		Name: "grpcgoonchnonheadlesslong_server_handle_count",
 		Help: "Total number of RPCs handled on the goonch server.",
 	})
 )
@@ -104,7 +104,7 @@ func decrypt(key []byte, cryptoText string) (string, error) {
 }
 
 func main() {
-	fmt.Println("grpcgoonch-nonheadless waiting for client requests...")
+	fmt.Println("grpcgoonch-nonheadless-long waiting for client requests...")
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", grpcPort))
 	if err != nil {
 		grpclog.Fatalf("Failed to listen on port %d: %v", grpcPort, err)
@@ -120,7 +120,7 @@ func main() {
 	grpcServer := grpc.NewServer(
 		grpc.UnaryInterceptor(grpcMetrics.UnaryServerInterceptor()),
 		grpc.KeepaliveParams(keepalive.ServerParameters{
-			MaxConnectionAge: time.Second * 31,
+			MaxConnectionAge: time.Minute * 8,
 		}),
 	)
 	grpcgoonch.RegisterServiceServer(grpcServer, &s)
