@@ -29,7 +29,7 @@ var (
 	reg          = prometheus.NewRegistry()
 	grpcMetrics  = grpc_prometheus.NewServerMetrics()
 	grpcReqCount = prometheus.NewCounter(prometheus.CounterOpts{
-		Name: "grpcgoonchheadless_server_handle_count",
+		Name: "grpcgoonchnonheadless_server_handle_count",
 		Help: "Total number of RPCs handled on the goonch server.",
 	})
 )
@@ -104,7 +104,7 @@ func decrypt(key []byte, cryptoText string) (string, error) {
 }
 
 func main() {
-	fmt.Println("grpcgoonch-headless waiting for client requests...")
+	fmt.Println("grpcgoonch-nonheadless waiting for client requests...")
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", grpcPort))
 	if err != nil {
 		grpclog.Fatalf("Failed to listen on port %d: %v", grpcPort, err)
